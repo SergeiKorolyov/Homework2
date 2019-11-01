@@ -17,12 +17,12 @@ public class Homework {
         System.out.println(Arrays.toString(findMinAndMax(array)));
         System.out.println(averageOfArray(array));
         System.out.println(negativeNumber(array));
-        System.out.println(Arrays.toString(deleteElement(array, 3)));
+        System.out.println(Arrays.toString(deleteElement( 3)));
         System.out.println(Arrays.toString(inReverse(array)));
         System.out.println(isArrayIncreacing(array));
         System.out.println(Arrays.toString(arrayShuffle(array)));
         System.out.println(Arrays.toString(isIncreace(array)));
-        System.out.println(twoDimensional(3, 3));
+        System.out.println(Arrays.deepToString(twoDimensional(3,3)));
     }
 
     public static boolean isPolyndrome(String s) {
@@ -93,41 +93,41 @@ public class Homework {
         return count;
     }
 
-    public static int[] deleteElement(int[] array, int position) {
-       int[] resArray = new int[array.length-1];
-        for (int i = 0; i < array.length; i++) {
-            if (i != position) {
-             i++;}
-        for (int j = 0; j<array.length-1; j++){
-            resArray[j] = array[i];
-            j++;
-        }
+    public static int[] deleteElement( int position) {  // исправить
+        int[] arrayTest = {3, 5, 67, 34, 2, 16, 24};
+        int[] resArray = new int[arrayTest.length-1];
+        int j = 0;
+            for (int i = 0; i < arrayTest.length; i++) {
+                if (i != position){
+                resArray[j] = arrayTest[i];
+                j++;
                 }
+            }
         return resArray;
     }
 
 
-    public static int[] inReverse(int[] array) {
-        int[] reverseArray = new int[array.length];
-        int j = array.length - 1;
+
+
+    public static int[] inReverse(int[] array) { // исправить
+        int[] res = new int[array.length];
         for (int i = 0; i < array.length; i++) {
-            reverseArray[j] = array[i];
-            j--;
+          res[i] = array[array.length - 1 - i];
         }
-        return reverseArray;
+        return res;
     }
 
-    public static boolean isArrayIncreacing(int[] array) {
+    public static boolean isArrayIncreacing(int[] array) { // исправить
         boolean res = true;
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] <= array[i - 1]) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > array[i+1]) {
                 res = false;
             }
         }
         return res;
     }
 
-    public static int[] arrayShuffle(int[] array) {
+    public static int[] arrayShuffle(int[] array) { //исправить
         Random rnd = new Random();
         for (int i = 0; i < array.length; i++) {
             int index = rnd.nextInt(array.length-1);
