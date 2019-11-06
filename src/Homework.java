@@ -3,12 +3,14 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Homework {
+
+
     public static void main(String[] args) {
-        System.out.println(isPolyndrome("ara ara"));
+        System.out.println(isPolyndrome("arafra"));
         System.out.println(Arrays.toString(randomArray(10)));
         int[] array;
         array = randomArray(10);
-        System.out.println(positionFinder(array, 34));
+        System.out.println(findNumberPosition(array, 34));
         System.out.println(Arrays.toString(findMinAndMax(array)));
         System.out.println(averageOfArray(array));
         System.out.println(negativeNumber(array));
@@ -17,13 +19,13 @@ public class Homework {
         System.out.println(isArrayIncreacing(array));
         System.out.println(Arrays.toString(arrayShuffle(array)));
         System.out.println(Arrays.toString(isIncreace(array)));
-       System.out.println(twoDimensional(3,3));
+        System.out.println(Arrays.deepToString(twoDimensional(3, 3)));
     }
 
     public static boolean isPolyndrome(String s) {
-        int n = s.length();
-        for (int i = 0; i < (n / 2); ++i) {
-            if (s.charAt(i) != s.charAt(n - i - 1)) {
+        int stringChars = s.length();
+        for (int i = 0; i < (stringChars / 2); ++i) {
+            if (s.charAt(i) != s.charAt(stringChars - i - 1)) {
                 return false;
             }
         }
@@ -32,16 +34,14 @@ public class Homework {
 
     public static int[] randomArray(int n) {
         int max = 100;
-        int min = -100;
-        max -= min;
         int[] array = new int[n];
         for (int i = 0; i < n; i++) {
-            array[i] = (int) (Math.random() * ++max) + min;
+            array[i] = (int) (Math.random() * ++max) - 25;
         }
         return array;
     }
 
-    public static int positionFinder(int[] array, int numberToSearch) {
+    public static int findNumberPosition(int[] array, int numberToSearch) {
         for (int i = 0; i < array.length; i++) {
             if (array[i] == numberToSearch) {
                 return i;
@@ -51,22 +51,19 @@ public class Homework {
     }
 
     public static int[] findMinAndMax(int[] array) {
-        int max = array[0];
-        int imax = 0;
-        int min = array[0];
-        int imin = 0;
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] > max) {
-                max = array[i];
-                imax = i;
+        int min = 0;
+        int max = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > array[max]) {
+                max = i;
+            } else {
+                if (array[i] < array[min]) {
+                    min = i;
+                }
             }
-            if (array[i] < min) {
-                min = array[i];
-                imin = i;
-            }
+            array[max] = min;
+            array[min] = max;
         }
-        array[imin] = max;
-        array[imax] = min;
         return array;
     }
 
@@ -85,42 +82,39 @@ public class Homework {
     public static int negativeNumber(int[] array) {
         int count = 0;
         for (int i = 0; i < array.length; i++) {
-            if (array[i] < 0) ;
-            count++;
+            while (array[i] < 0) {
+                count++;
+                break;
+            }
         }
         return count;
     }
 
     public static int[] deleteElement(int[] array, int position) {
+        int[] resArray = new int[array.length - 1];
         int j = 0;
         for (int i = 0; i < array.length; i++) {
-            if (i == position)
-                i++;
-            {
-                for (j = 0; j < array.length - 1; j++) {
-                    array[i] = array[j];
-                    j++;
-                }
+            if (i != position) {
+                resArray[j] = array[i];
+                j++;
             }
         }
-        return array;
+        return resArray;
     }
 
 
     public static int[] inReverse(int[] array) {
-        int[] reverseArray = new int[array.length];
-        int j = array.length - 1;
+        int[] res = new int[array.length];
         for (int i = 0; i < array.length; i++) {
-            reverseArray[j] = array[i];
-            j--;
+            res[i] = array[array.length - 1 - i];
         }
-        return reverseArray;
+        return res;
     }
 
     public static boolean isArrayIncreacing(int[] array) {
         boolean res = true;
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] <= array[i - 1]) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > array[i + 1]) {
                 res = false;
             }
         }
@@ -129,11 +123,9 @@ public class Homework {
 
     public static int[] arrayShuffle(int[] array) {
         Random rnd = new Random();
-        for (int i = array.length - 1; i > 0; i--) {
-            int index = rnd.nextInt(i + 1);
-            int a = array[index];
+        for (int i = 0; i < array.length; i++) {
+            int index = rnd.nextInt(array.length - 1);
             array[index] = array[i];
-            array[i] = a;
         }
         return array;
     }
@@ -153,12 +145,10 @@ public class Homework {
 
     public static int[][] twoDimensional(int a, int b) {
         int max = 100;
-        int min = -100;
-        max -= min;
         int[][] array2d = new int[a][b];
         for (int i = 0; i < a; i++) {
             for (int j = 0; j < array2d[i].length; j++) {
-                array2d[i][j] = (int) (Math.random() * ++max) + min;
+                array2d[i][j] = (int) (Math.random() * ++max) - 25;
             }
         }
         return array2d;
